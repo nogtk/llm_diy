@@ -2,11 +2,14 @@ import os
 import sys
 
 import torch.nn as nn
+
+# 現在のディレクトリと親ディレクトリをパスに追加
+sys.path.append(os.path.dirname(__file__))
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+
 from feed_forward import FeedForward
 from layer_norm import LayerNorm
 
-# 親ディレクトリをパスに追加
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from chapter3.multi_head_attention import MultiHeadAttentionWrapper
 
 

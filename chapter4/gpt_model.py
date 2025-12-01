@@ -1,6 +1,14 @@
+import os
+import sys
+
 import torch
 import torch.nn as nn
+
+# 現在のディレクトリをパスに追加
+sys.path.append(os.path.dirname(__file__))
 from transformer_block import TransformerBlock
+
+from chapter4.layer_norm import LayerNorm
 
 
 class GPTModel(nn.Module):
@@ -13,7 +21,7 @@ class GPTModel(nn.Module):
         self.trf_blocks = nn.Sequential(
             *[TransformerBlock(cfg) for _ in range(cfg["n_layers"])]
         )
-        self.final_norm = nn.LayerNorm(cfg["emb_dim"])
+        self.final_norm = LayerNorm(cfg["emb_dim"])
         self.out_head = nn.Linear(cfg["emb_dim"], cfg["vocab_size"], bias=False)
 
     def forward(self, in_idx):
